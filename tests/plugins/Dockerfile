@@ -1,4 +1,4 @@
 FROM bats-jenkins
 
-COPY plugins.txt /usr/share/jenkins/ref/
-RUN /usr/local/bin/plugins.sh /usr/share/jenkins/ref/plugins.txt
+COPY plugins.txt /usr/lib/jenkins/ref/
+RUN /usr/local/bin/plugins.sh /usr/lib/jenkins/ref/plugins.txt

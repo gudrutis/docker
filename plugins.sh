@@ -58,7 +58,7 @@ then
         echo "$JENKINS_PLUGIN:$JENKINS_PLUGIN_VER"
     done >"$TEMP_ALREADY_INSTALLED"
 else
-    JENKINS_WAR=/usr/share/jenkins/jenkins.war
+    JENKINS_WAR=/usr/lib/jenkins/jenkins.war
     if [ -f "$JENKINS_WAR" ]
     then
         echo "Analyzing war: $JENKINS_WAR"
@@ -79,7 +79,7 @@ else
     fi
 fi
 
-REF=/usr/share/jenkins/ref/plugins
+REF=/usr/lib/jenkins/ref/plugins
 mkdir -p $REF
 COUNT_PLUGINS_INSTALLED=0
 while read -r spec || [ -n "$spec" ]; do

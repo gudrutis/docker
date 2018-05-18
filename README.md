@@ -53,7 +53,7 @@ and `Dockerfile`
 
 ```
 FROM jenkins/jenkins:lts
-COPY executors.groovy /usr/share/jenkins/ref/init.groovy.d/executors.groovy
+COPY executors.groovy /usr/lib/jenkins/ref/init.groovy.d/executors.groovy
 ```
 
 
@@ -140,12 +140,12 @@ USER jenkins
 ```
 
 In such a derived image, you can customize your jenkins instance with hook scripts or additional plugins.
-For this purpose, use `/usr/share/jenkins/ref` as a place to define the default JENKINS_HOME content you
+For this purpose, use `/usr/lib/jenkins/ref` as a place to define the default JENKINS_HOME content you
 wish the target installation to look like :
 
 ```
 FROM jenkins/jenkins:lts
-COPY custom.groovy /usr/share/jenkins/ref/init.groovy.d/custom.groovy
+COPY custom.groovy /usr/lib/jenkins/ref/init.groovy.d/custom.groovy
 ```
 
 ## Preinstalling plugins
@@ -193,8 +193,8 @@ Furthermore it is possible to pass a file that contains this set of plugins (wit
 
 ```Dockerfile
 FROM jenkins/jenkins:lts
-COPY plugins.txt /usr/share/jenkins/ref/plugins.txt
-RUN /usr/local/bin/install-plugins.sh < /usr/share/jenkins/ref/plugins.txt
+COPY plugins.txt /usr/lib/jenkins/ref/plugins.txt
+RUN /usr/local/bin/install-plugins.sh < /usr/lib/jenkins/ref/plugins.txt
 ```
 
 When jenkins container starts, it will check `JENKINS_HOME` has this reference content, and copy them
@@ -202,7 +202,7 @@ there if required. It will not override such files, so if you upgraded some plug
 be reverted on next start.
 
 In case you *do* want to override, append '.override' to the name of the reference file. E.g. a file named
-`/usr/share/jenkins/ref/config.xml.override` will overwrite an existing `config.xml` file in JENKINS_HOME.
+`/usr/lib/jenkins/ref/config.xml.override` will overwrite an existing `config.xml` file in JENKINS_HOME.
 
 Also see [JENKINS-24986](https://issues.jenkins-ci.org/browse/JENKINS-24986)
 
@@ -226,7 +226,7 @@ script-security:1.13
 
 For 2.x-derived images, you may also want to
 
-    RUN echo 2.0 > /usr/share/jenkins/ref/jenkins.install.UpgradeWizard.state
+    RUN echo 2.0 > /usr/lib/jenkins/ref/jenkins.install.UpgradeWizard.state
 
 to indicate that this Jenkins installation is fully configured.
 Otherwise a banner will appear prompting the user to install additional plugins,
