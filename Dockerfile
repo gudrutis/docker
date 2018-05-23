@@ -1,6 +1,7 @@
 FROM openjdk:8-jdk
+# FROM cern/cc7-base
 
-RUN apt-get update && apt-get install -y git curl && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y git curl vim rsync && rm -rf /var/lib/apt/lists/*
 
 ARG user=jenkins
 ARG group=jenkins
