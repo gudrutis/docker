@@ -1,7 +1,8 @@
-FROM openjdk:8-jdk
-# FROM cern/cc7-base
+# FROM openjdk:8-jdk
+FROM cern/cc7-base
 
-RUN apt-get update && apt-get install -y git curl vim rsync && rm -rf /var/lib/apt/lists/*
+# RUN apt-get update && apt-get install -y git curl vim rsync && rm -rf /var/lib/apt/lists/*
+RUN yum update -y && yum install -y git curl vim less rsync java-1.8.0-openjdk && yum clean all
 
 ARG user=jenkins
 ARG group=jenkins
@@ -9,7 +10,11 @@ ARG uid=1000
 ARG gid=1000
 ARG http_port=8080
 ARG agent_port=50000
-ARG JENKINS_HOME=/var/jenkins_home
+ARG JENKINS_HOME=/var/lib/jenkins
+
+ENV JENKINS_HOME $JENKINS_HOME
+ENV JENKINS_SLAVE_AGENT_PORT ${agent_port}
+
 
 ENV JENKINS_HOME $JENKINS_HOME
 ENV JENKINS_SLAVE_AGENT_PORT ${agent_port}
